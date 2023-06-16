@@ -1,0 +1,135 @@
+.container{
+    margin-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.nav-container a{
+    text-decoration: none;
+    color: #CB0712;
+}
+.nav-container{
+    border-bottom: 1px solid #d2d2d2;
+}
+.list-type-moto{
+    gap: 30px;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+.list-type-moto >button{
+    border-radius: 20px;
+    color: #707070;
+    border: 1px solid #707070;
+    background-color: transparent;
+    padding: 0.5rem 2rem;
+    text-align: center;
+    width: 160px;
+    height: 40px;
+    
+
+}
+.list-type-moto >button:hover{
+    color: #CB0712;
+    border-color: #CB0712;
+}
+.product-TxtTile{
+    margin-left: 1rem;
+    font-size: 60px;
+    font-weight: 700;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.25;
+    letter-spacing: -2.4px;
+    text-align: left;
+    color: #d2d2d2;
+}
+.product{
+    margin-top: 2rem;
+    gap:2rem;
+    justify-content: space-around;
+}
+.product-item{
+    flex: 0 0 30%;
+    max-width: 25%;
+    min-height: 30vh;
+    position: relative;
+}
+/* Điện thoại */
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .product-item{
+        flex: 0 0 40%;
+        max-width: 40%;
+    }
+  }
+
+/* Máy tính bảng */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .product-item{
+        flex: 0 0 48%;
+        max-width: 48%;
+
+    }
+}
+.img-product-item{
+    min-height: 25vh;
+    width: 100%;
+    cursor: pointer;
+}
+.img-product-item img{
+    display: inline-block;
+    width: 80%;
+}
+.info-product-item{
+    cursor: text;
+}
+.info-product-item >p{
+    color: #c00;
+    font-weight: 700;
+    margin-bottom: 0;
+    font-size: 1rem;
+    padding-top: 20px;
+    text-transform: capitalize;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    white-space: pre-line;
+}
+.product-item >.more{
+    box-sizing: content-box;
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    border-radius: 1000px;
+    background-color: rgba(203, 7, 18,.18);
+    
+    width: 20vh;
+    height: 20vh;
+    transition: .3s all;
+    transition-delay: 0.2s;
+}
+.product-item >.more >a{
+    text-decoration: none;
+
+    display: block;
+    width: 100%;
+    background: rgb(203, 7, 18);
+    
+    border-radius: 50px;
+    border: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0.5rem 0;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}
+.product-item:hover >.more{
+    opacity: 1;
+    color: #fff;
+    top:40%;
+    
+}

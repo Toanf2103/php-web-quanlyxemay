@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/chitiet.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <style>
+        .disabled {
+          background-color: #dddddd;
+          color: red;
+          cursor: not-allowed;
+        }
+        .loader {
+  width: 106px;
+  height: 56px;
+  display: block;
+  /* margin: 30px auto; */
+  background-image: linear-gradient(#000 50px, transparent 0), linear-gradient(#000 50px, transparent 0), linear-gradient(#000 50px, transparent 0), linear-gradient(#000 50px, transparent 0), radial-gradient(circle 14px, #000 100%, transparent 0);
+  background-size: 48px 15px , 15px 35px, 15px 35px, 25px 15px, 28px 28px;
+  background-position: 25px 5px, 58px 20px, 25px 17px, 2px 37px, 76px 0px;
+  background-repeat: no-repeat;
+  /* position: relative; */
+  transform: rotate(-45deg);
+  box-sizing: border-box;
+}
+.loader::after,
+.loader::before {
+  content: '';  
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border: 6px solid #000;
+  border-radius: 50%;
+  left: -45px;
+  top: -10px;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(#000 64px, transparent 0), linear-gradient(#000 66px, transparent 0), radial-gradient(circle 4px, #000 100%, transparent 0);
+  background-size: 40px 1px , 1px 40px, 8px 8px;
+  background-position: center center;
+  box-sizing: border-box;
+  animation: rotation 0.3s linear infinite;
+}
+.loader::before {
+  left: 25px;
+  top: 60px;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+      </style>
+</head>
+<body>
+ 
+    <header>
+        <nav class="d-flex align-items-center" >
+            <div class="logo align-self-start">
+                <img src="https://www.lamborghini.com/sites/it-en/files/themes/custom/lambo_facelift_2019/images/logo.png" alt="" width="60px">
+            </div>
+            <ul class="d-flex">
+                <li><a class="on-dark" href=""><span>Trang chủ</span></a></li>
+                <li><a class="on-dark" href=""><span>Trang chủ</span></a></li>
+                <li><a class="on-dark" href=""><span>Trang chủ</span></a></li>
+            </ul>
+            <div class="mid d-flex justify-content-center ">
+                <div class="search d-flex align-items-center px-1 py-1">
+                    <input class="serach-header " type="text d-block" placeholder="Tìm kiếm....">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search icon-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                      </svg>
+                </div>
+            </div>
+            <div class="d-flex right align-items-center header-icon">
+                <div class="header-icon-cart" id="cart-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                      </svg>
+                </div>
+                <div class="header-icon-login">
+                    <div class="nav-header" id="login">
+                        <img src="https://img5.thuthuatphanmem.vn/uploads/2021/11/20/anh-cute-nguoi-that-dep-nhat_022606213.jpg" alt="">
+                        <a>Đăng nhập</a>
+                        <i class="fas fa-sort-down"></i>
+                    </div>
+                    <ul class="nav-content none">
+                        <li>Tên tao</li>
+                        <li>Đăng xuất</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="cart none" id="cart">
+            <!-- title -->
+            <div class="cart-title d-flex align-items-center">
+                <p>Giỏ hàng</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16" id="closeCart">
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                </svg>
+            </div>
+            <!-- end title -->
+
+            <!-- order -->
+            <div class="cart-product d-flex flex-1">
+                
+                <div class="cart-product-item">
+                    <!-- Header item -->
+                    <div class="cart-product-item-header d-flex align-items-center">
+                        <div class="calender">
+                            <input type="date">
+                            <input type="date">
+
+                        </div>
+                        <div class="check-box">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                              </div>
+                        </div>
+                    </div>
+                    <!-- End header item -->
+                    <!-- body item -->
+                    <div class="item-cart d-flex align-items-center justify-content-between px-3 py-1">
+                        <div class="item-cart-img ">
+                            <img src="https://cdn.honda.com.vn/motorbikes/February2023/dCC7xwQyQuRWszrYrT7F.jpg" class="rounded mx-auto d-block" alt="" width="100" >
+                        </div>
+                        <div class="item-cart-name flex-1">
+                            <span>Honda winner X</span>
+                        </div>
+                        <div class="item-cart-price">
+                            <span>130.000</span>
+                        </div>
+                        <div class="item-cart-clear">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                              </svg>
+                        </div>
+                    </div>
+                    <!-- end body item -->
+
+                    <!-- body item -->
+                    <div class="item-cart d-flex align-items-center justify-content-between px-3 py-1">
+                        <div class="item-cart-img ">
+                            <img src="https://cdn.honda.com.vn/motorbikes/February2023/dCC7xwQyQuRWszrYrT7F.jpg" class="rounded mx-auto d-block" alt="" width="100" >
+                        </div>
+                        <div class="item-cart-name flex-1">
+                            <span>Honda winner X</span>
+                        </div>
+                        <div class="item-cart-price">
+                            <span>130.000</span>
+                        </div>
+                        <div class="item-cart-clear">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                              </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- end body item -->
+                    <a  type="button" class="btn btn-outline-primary w-100 mb-2">Thanh toán</a>
+                </div>
+                <!-- end order -->
+
+                <!-- btn-thanh-toan -->
+                
+                <!-- end btn-thanh-toan -->
+                
+            </div>
+        </div>
+        
+    </header>
+    
+    <!-- <div class="slide-show">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="https://cdn.honda.com.vn/motorbikes/September2022/JCqCTLtm6ut04NB8btk1.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="https://yenxephuquang.vn/wp-content/uploads/2021/11/hinh-anh-xe-do-dep-doc-dao-moi-nhat-2022-1-1.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="https://cdn.honda.com.vn/motorbikes/September2022/JCqCTLtm6ut04NB8btk1.jpg" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          
+    </div> -->
+    <div class="container">
+        <nav aria-label="breadcrumb" class="nav-container">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item " aria-current="page"><a href="#">Trang chủ</a></li>
+              <li class="breadcrumb-item " aria-current="page"><a href="#">Danh sách xe</a></li>
+              <li class="breadcrumb-item active" >Tên xe</li>
+
+                           
+            </ol>
+          </nav>
+        <!-- <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Tìm kiếm xe" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+          </div> -->
+        <div class="moto w-100 d-flex align-items-center mt-3 ">
+            <div class="moto-img d-flex flex-column w-30">
+                <img src="https://cdn.honda.com.vn/motorbike-versions/May2023/aU4hq1ZNmu5D6ExvIXq4.jpg" class="img-fluid" alt="Responsive image d-block" id="img-product">
+                <div class="btn-img d-flex flex-wrap my-1" id="btn-img">
+                    <img src="https://cdn.honda.com.vn/motorbike-versions/November2022/NZBGpkdoYhzAXSph7Pev.jpg
+                    " alt="..." class="img-thumbnail d-block">
+                    <img src="https://cdn.honda.com.vn/motorbike-versions/November2022/NZBGpkdoYhzAXSph7Pev.jpg
+                    " alt="..." class="img-thumbnail">
+                    <img src="https://cdn.honda.com.vn/motorbike-versions/November2022/NZBGpkdoYhzAXSph7Pev.jpg
+                    " alt="..." class="img-thumbnail">
+                    <img src="https://cdn.honda.com.vn/motorbike-versions/November2022/NZBGpkdoYhzAXSph7Pev.jpg
+                    " alt="..." class="img-thumbnail">
+                    <img src="https://cdn.honda.com.vn/motorbike-versions/November2022/NZBGpkdoYhzAXSph7Pev.jpg
+                    " alt="..." class="img-thumbnail">
+                    <img src="https://cdn.honda.com.vn/motorbike-versions/November2022/NZBGpkdoYhzAXSph7Pev.jpg
+                    " alt="..." class="img-thumbnail">
+                    <img src="https://cdn.honda.com.vn/motorbike-versions/November2022/NZBGpkdoYhzAXSph7Pev.jpg
+                    " alt="..." class="img-thumbnail">
+                </div>
+            </div>
+            <div class="moto-info flex-1 d-flex flex-column align-self-start">
+                <h2>
+                    Tên xe nè
+                </h2>
+                <p>Loại xe</p>
+                <p>Hãng xe</p>
+                <p>Trạng thái</p>
+                <p>Biển số</p>
+                <h3>
+                    Giá: 165.000 VNĐ / 1 ngày
+                </h3>
+                <span class="loader"></span>
+                <a type="button" class="btn btn-outline-secondary btn-thuexe" id="thueXe">Thuê xe</a>
+                <input type="text" id="datePicker" />
+
+                <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+                <script>
+                   $(function() {
+                        $('#datePicker').daterangepicker({
+                            minDate: moment(),
+                            applyButtonClasses: 'btn-primary',
+                            applyButtonText: 'Chọn',
+                            
+                            isInvalidDate: function(date) {
+                            var invalidStartDate = moment('2023-06-01');
+                            var invalidEndDate = moment('2023-06-06');
+                            return date.isBetween(invalidStartDate, invalidEndDate, null, '[]');
+                            }
+                        }
+                        );
+                        $(".ui-datepicker-trigger").val("Chọn ngày");
+                    });
+                </script>
+            </div>
+
+        </div>
+        <div class="dieu-khoan mt-5">
+            <h3>Thủ tục khi thuê xe</h3>
+            <ul>
+                <li>Cần 1 trong các loại giấy sau: Chứng minh nhân dân, Hộ chiếu, Passport, Hộ khẩu hoặc giấy tờ tuỳ thân có hình khác.</li>
+                <li>Bằng lái xe bắt buộc
+                </li>
+                <li>Không cần đặt cọc</li>
+                <li>Thanh toán khi trả xe</li>
+            </ul>
+            <span>Có giao nhận xe tận nơi miễn phí tại sân bay, bến xe, bến tàu và các quận huyện nội thành Đà Nẵng. Thời gian thuê được tính 1 ngày là 24 tiếng, quá thời gian 6 tiếng sẽ tính thêm 1 ngày(được trể 1 tiếng). Khi thuê xe sẽ làm hợp đồng có 2 bản , mỗi bên giữ 1 bản có ký tên đóng dấu công ty. Thời gian giao nhận xe: từ 7h00 - 19h30 hàng ngày, tất cả các ngày lễ tết vv…</span>
+
+        </div>
+          
+    </div>
+    
+    <script>
+        const btnLogin = document.getElementById("login");
+        btnLogin.addEventListener("click",(e)=>{
+            const tabLogin = document.getElementsByClassName("nav-content")[0];
+            tabLogin.classList.toggle("none");
+        });
+
+        document.addEventListener('click', function(event) {
+                const outsideClick = !document.getElementsByClassName('d-flex right align-items-center header-icon')[0].contains(event.target);
+                if(outsideClick){
+                     document.getElementsByClassName('nav-content')[0].classList.add('none');
+                }
+            });
+    </script>
+    <script>
+        const cartIconBtn = document.getElementById("cart-icon");
+        const cartBtn = document.getElementById("closeCart");
+        
+        function toggle(){
+            document.getElementById("cart").classList.toggle("none"); 
+        }
+        cartIconBtn.addEventListener("click",()=>toggle());
+        cartBtn.addEventListener("click",()=>toggle());
+
+    </script>
+    <script>
+        const header = document.getElementsByTagName('header')[0];
+        const  headerHeight=header.offsetHeight;
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction(){
+            if(document.body.scrollTop > headerHeight || document.documentElement.scrollTop > headerHeight){
+                header.classList.add('fixed');
+            }else{
+                header.classList.remove('fixed');
+            }
+        }
+    </script>
+
+    <!-- script chi tiet -->
+    <script>
+        const imgElm = document.getElementById("img-product");
+        const imgBtnElms = document.getElementById("btn-img").getElementsByTagName('img');
+
+        for (var i = 0; i < imgBtnElms.length; i++) {
+           imgBtnElms[i].addEventListener('click',(e)=>{
+                imgElm.src=e.target.src;
+           });
+          
+        }
+    </script>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+</body>
+</html>

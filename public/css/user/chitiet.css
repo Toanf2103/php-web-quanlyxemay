@@ -1,0 +1,75 @@
+body{
+    position: relative;
+}
+
+
+
+.moto-img{
+    min-width: 40%;
+    
+}
+.moto-img img{
+    display: inline-block;
+}
+.moto-img > .moto-img-show >img{
+    display: inline-block;
+    /* border: 1px solid grey; */
+    max-height: 40vh;
+    position: absolute;
+    animation: moveUpDown 3s infinite;
+    
+}
+
+.moto-img > .btn-img{
+   
+    gap: 0.5rem;
+    
+}
+.moto-img > .btn-img >img{
+    max-width: 5rem;
+    cursor: pointer;
+}
+.moto-info{
+    margin-left:30vh;
+}
+.moto-info h2{
+    color: #CB0712;
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+.moto-info p{
+    font-size: 1rem;
+    font-weight: 600;
+}
+.moto-info p span{
+    white-space: pre-line;
+}
+.moto-info h3{
+    color: #CB0712;
+
+}
+.btn-thuexe{
+    margin-top: 2rem;
+}
+.none{
+    display: none;
+}
+.moto-img-show{
+    position: relative;
+    height: 50vh;
+    border:1px solid grey;
+    
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+@keyframes moveUpDown {
+    0%, 100% {
+      scale: 1;
+    }
+    50% {
+        scale: 0.8;
+    }
+  }
