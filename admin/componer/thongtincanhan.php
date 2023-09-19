@@ -225,6 +225,13 @@
         }else{
             showAlert("Cập nhật thông tin thành công!");
             document.getElementById('btn-submit-update-info').disabled=true;
+            document.querySelectorAll(".pencil-input").forEach(e=>{
+                var targetId = e.getAttribute("data-target");
+                var input = document.getElementById(targetId);
+                if (input) {
+                    input.disabled = true;
+                }
+                })
             xml = new XMLHttpRequest();
             {
                 xml.onreadystatechange = function() {

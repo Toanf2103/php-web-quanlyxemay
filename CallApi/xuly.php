@@ -1,7 +1,8 @@
 <?php
     // include_once('../Model/Curl.php');
-    
+    $globalHosting = 'http://localhost:5000/';
     function diffDate($ngayBD,$ngayKT){
+        global $globalHosting;
         $dateBD = DateTime::createFromFormat('d-m-Y', $ngayBD);
         $dateKT = DateTime::createFromFormat('d-m-Y', $ngayKT);
 
@@ -13,6 +14,8 @@
     }
     
     function setXe($xeData){
+        global $globalHosting;
+
         $xe = new Xe();
         $xe->setMaXe($xeData['maXe']);
 
@@ -32,7 +35,7 @@
 
         $listHinhAnh=[];
         foreach($xeData['hinhAnh'] as $img){
-            $listHinhAnh[]='http://localhost:5000/'.$img;
+            $listHinhAnh[]=$globalHosting.$img;
         }
         $listLich=[];
         if(isset($xeData['lich'])){
@@ -72,7 +75,7 @@
                 "loaiXe" => $xe['loaiXe'],
                 "hangXe" => $xe['hangXe'],
                 "bienSoXe" => $xe['bienSoXe'],
-                "hinhAnh" => 'http://localhost:5000/'.$xe['hinhAnh'][0]               
+                "hinhAnh" => $globalHosting.$xe['hinhAnh'][0]               
 
             ];
             $tongTien+=$xe['giaThue'];
